@@ -87,7 +87,7 @@
               <div class="bg-light px-4 py-3">
                 <div class="row align-items-center text-center">
                   <div class="col-md-6 mb-3 mb-md-0 text-md-left"><a class="btn btn-link p-0 text-dark btn-sm" href="{% url 'store:home' %}"><i class="fas fa-long-arrow-alt-left mr-2"> </i>Continue shopping</a></div>
-                  <div class="col-md-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="checkout.html">Procceed to checkout<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
+                  <div class="col-md-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="#">Procceed to checkout<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@
                     {% if addresses %}
                       {% for address in addresses %}
                         <div class="mb-3">
-                        <input type="radio" name="address" value="{{address.id}}"> <strong>Address {{forloop.counter}}</strong> <br>
+                        <input type="radio" name="address" value="{{address.id}}" checked> <strong>Address {{forloop.counter}}</strong> <br>
                         ( {{address.locality}}, {{address.city}}, {{address.state}} )
                         </div>
                       {% endfor %}
@@ -153,37 +153,3 @@
 
       </div>
       {% endblock content %}
-
-      {% block payment-gateway %}
-        <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR-PAYPAL-CLIENT-ID&currency=USD"></script>
-
-    <script>
-        // Render the PayPal button into #paypal-button-container
-        paypal.Buttons({
-
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '{{total_amount}}'
-                        }
-                    }]
-                });
-            },
-
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Show a success message to the buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                    // Savind Order in Database after Payment Success
-                    document.getElementById('myform').submit();
-                });
-            }
-
-
-        }).render('#paypal-button-container');
-    </script>
-      {% endblock payment-gateway %}
