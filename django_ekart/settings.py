@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'store',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# AWS S3 Setting
+
+
+
+AWS_ACCESS_KEY_ID = 'AKIAVHRXEUYTE7TQEDVK'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'shopmebucket'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_REGION_NAME='ap-east-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
