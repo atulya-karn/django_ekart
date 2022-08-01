@@ -69,10 +69,10 @@ WSGI_APPLICATION = 'django_ekart.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'databaseshopme',
-        'HOST': 'databaseshopme.ckh6tlyjknns.us-east-1.rds.amazonaws.com',
-        'USER': 'admin',
+        'HOST': 'shopme-instance.ckh6tlyjknns.us-east-1.rds.amazonaws.com',
+        'USER': 'shopme_admin',
         'PASSWORD' : '12345678',
         'PORT': '3306',
 
