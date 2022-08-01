@@ -2,6 +2,13 @@ from pathlib import Path
 
 import os
 
+import json
+
+#Json file storing credentials
+json_file = open('django_ekart/config.json')
+config = json.load(json_file)
+json_file.close()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,10 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3%y3laftm62q0zaj+s7#p-xqq9(&#q+)s8)p-&#&bz*0$!xu$0'
+SECRET_KEY = config.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -71,11 +78,11 @@ WSGI_APPLICATION = 'django_ekart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'databaseshopme',
-        'HOST': 'shopme-instance.ckh6tlyjknns.us-east-1.rds.amazonaws.com',
-        'USER': 'shopme_admin',
-        'PASSWORD' : '12345678',
+        'NAME': config.get("DATABASE_NAME"),
+        'HOST': config.get("DATABASE_HOST"),
         'PORT': '3306',
+        'USER': config.get("DATABASE_USER"),
+        'PASSWORD': config.get("DATABASE_PASSWORD"),
 
     }
 }
@@ -105,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -137,12 +144,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 
-AWS_ACCESS_KEY_ID = 'AKIAVHRXEUYTE7TQEDVK'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'shopmebucket'
+AWS_ACCESS_KEY_ID = config.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = config.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_S3_REGION_NAME='ap-east-1'
+AWS_S3_REGION_NAME='ap-south-1'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
