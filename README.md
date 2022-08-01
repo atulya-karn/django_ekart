@@ -73,7 +73,7 @@ $  source venv/bin/activate
 
 **3. Clone this project**
 ```
-$  git clone https://github.com/vijaythapa333/django-jewelry-shop.git
+$  git clone https://github.com/atulya-karn/django_ekart.git
 ```
 
 Then, Enter the project
